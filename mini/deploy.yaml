@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app-vinicius
+  name: app-vinicius
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conteiner-vinicius
+  template:
+    metadata:
+      labels:
+        app: conteiner-vinicius
+    spec:
+      containers:
+      - image: mini-app:1.0.0
+        name: conteiner-vinicius
+        resources: {}
+        env:
+        - name: NAME
+          valueFrom:
+            configMapKeyRef:
+              name: cm-vinicius
+              key: NAME
